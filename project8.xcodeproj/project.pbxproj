@@ -13,7 +13,6 @@
 		A4BD830B2569B1490045666E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BD83092569B1490045666E /* Main.storyboard */; };
 		A4BD830D2569B14C0045666E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4BD830C2569B14C0045666E /* Assets.xcassets */; };
 		A4BD83102569B14C0045666E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BD830E2569B14C0045666E /* LaunchScreen.storyboard */; };
-		A4BD831A256B38670045666E /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BD8319256B38670045666E /* UILabel+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		A4BD830C2569B14C0045666E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4BD830F2569B14C0045666E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4BD83112569B14C0045666E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A4BD8319256B38670045666E /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +59,6 @@
 				A4BD83032569B1490045666E /* AppDelegate.swift */,
 				A4BD83052569B1490045666E /* SceneDelegate.swift */,
 				A4BD83072569B1490045666E /* ViewController.swift */,
-				A4BD8319256B38670045666E /* UILabel+extension.swift */,
 				A4BD83092569B1490045666E /* Main.storyboard */,
 				A4BD830C2569B14C0045666E /* Assets.xcassets */,
 				A4BD830E2569B14C0045666E /* LaunchScreen.storyboard */,
@@ -141,7 +138,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4BD83082569B1490045666E /* ViewController.swift in Sources */,
-				A4BD831A256B38670045666E /* UILabel+extension.swift in Sources */,
 				A4BD83042569B1490045666E /* AppDelegate.swift in Sources */,
 				A4BD83062569B1490045666E /* SceneDelegate.swift in Sources */,
 			);
