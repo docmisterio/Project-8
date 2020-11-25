@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     
     var activatedButtons = [UIButton]()
     var solutions = [String]()
+    var correctlyAnswered = Int()
     
     var score = 0 {
         didSet {
@@ -149,11 +150,10 @@ class ViewController: UIViewController {
             
             currentAnswer.text = ""
             score += 1
+            correctlyAnswered += 1
                         
-            if score % 7 == 0 {
-                let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Let's Go!", style: .default, handler: levelUp))
-                present(ac, animated: true)
+            if correctlyAnswered % 7 == 0 {
+               nextLevelAlert()
             }
         } else {
             let ac = UIAlertController(title: "WRONG", message: "\(answerText) is not the correct answer. \n Please try again.", preferredStyle: .alert)
@@ -174,7 +174,7 @@ class ViewController: UIViewController {
         var cluesString = ""
         var solutionsString = ""
         var letterBits = [String]()
-        
+
         if let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: ".txt") {
             if let levelContents = try? String(contentsOf: levelFileURL) {
                 var lines = levelContents.components(separatedBy: "\n")
@@ -218,5 +218,11 @@ class ViewController: UIViewController {
         for button in letterButtons {
             button.isHidden = false
         }
+    }
+    
+    func nextLevelAlert() {
+        let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Let's Go!", style: .default, handler: levelUp))
+        present(ac, animated: true)
     }
 }
