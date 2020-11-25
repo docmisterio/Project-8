@@ -138,6 +138,7 @@ class ViewController: UIViewController {
     
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnswer.text else { return }
+        if answerText == "" { return }
         
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
@@ -155,9 +156,10 @@ class ViewController: UIViewController {
                 present(ac, animated: true)
             }
         } else {
-            let ac = UIAlertController(title: "WRONG", message: "That is not the correct answer. \n Please try again.", preferredStyle: .alert)
+            let ac = UIAlertController(title: "WRONG", message: "\(answerText) is not the correct answer. \n Please try again.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
+            score -= 1
         }
     }
     
@@ -205,7 +207,6 @@ class ViewController: UIViewController {
                 letterButtons[i].setTitle(letterBits[i], for: .normal)
             }
         }
-        
     }
     
     func levelUp(action: UIAlertAction) {
