@@ -154,6 +154,10 @@ class ViewController: UIViewController {
                 ac.addAction(UIAlertAction(title: "Let's Go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            let ac = UIAlertController(title: "WRONG", message: "That is not the correct answer. \n Please try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
     }
     
