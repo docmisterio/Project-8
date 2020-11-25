@@ -10,9 +10,12 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
     
-    var score = 0
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
     var level = 1
-    
     
     override func loadView() {
         view = UIView()
@@ -63,6 +66,8 @@ class ViewController: UIViewController {
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsView.layer.borderColor = UIColor.lightGray.cgColor
+        buttonsView.layer.borderWidth = 2
         view.addSubview(buttonsView)
         
         NSLayoutConstraint.activate([
@@ -107,6 +112,7 @@ class ViewController: UIViewController {
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
                 
+                
                 let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
                 
@@ -142,7 +148,7 @@ class ViewController: UIViewController {
             
             currentAnswer.text = ""
             score += 1
-            
+                        
             if score % 7 == 0 {
                 let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's Go!", style: .default, handler: levelUp))
@@ -184,6 +190,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+        
         cluesLabel.text = cluesString.trimmingCharacters(in: .whitespacesAndNewlines)
         answersLabel.text = solutionsString.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -208,4 +215,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
