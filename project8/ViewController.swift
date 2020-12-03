@@ -151,9 +151,9 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             correctlyAnswered += 1
-                        
+            
             if correctlyAnswered % 7 == 0 {
-               nextLevelAlert()
+                nextLevelAlert()
             }
         } else {
             let ac = UIAlertController(title: "WRONG", message: "\(answerText) is not the correct answer. \n Please try again.", preferredStyle: .alert)
@@ -174,40 +174,46 @@ class ViewController: UIViewController {
         var cluesString = ""
         var solutionsString = ""
         var letterBits = [String]()
-
-        if let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: ".txt") {
-            if let levelContents = try? String(contentsOf: levelFileURL) {
-                var lines = levelContents.components(separatedBy: "\n")
-                lines.shuffle()
-                
-                for (index, line) in lines.enumerated() {
-                    let parts = line.components(separatedBy: ": ")
-                    let answer = parts[0]
-                    let clue = parts[1]
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let levelFileURL = Bundle.main.url(forResource: "level\(self.level)", withExtension: ".txt") {
+                if let levelContents = try? String(contentsOf: levelFileURL) {
+                    var lines = levelContents.components(separatedBy: "\n")
+                    lines.shuffle()
                     
-                    cluesString += "\(index + 1). \(clue)\n"
-                    
-                    let solutionWord = answer.replacingOccurrences(of: "|", with: "")
-                    solutionsString += "\(solutionWord.count) letters\n"
-                    solutions.append(solutionWord)
-                    
-                    let bits = answer.components(separatedBy: "|")
-                    letterBits += bits
+                    for (index, line) in lines.enumerated() {
+                        let parts = line.components(separatedBy: ": ")
+                        let answer = parts[0]
+                        let clue = parts[1]
+                        
+                        cluesString += "\(index + 1). \(clue)\n"
+                        
+                        let solutionWord = answer.replacingOccurrences(of: "|", with: "")
+                        solutionsString += "\(solutionWord.count) letters\n"
+                        self.solutions.append(solutionWord)
+                        
+                        let bits = answer.components(separatedBy: "|")
+                        letterBits += bits
+                    }
                 }
             }
         }
         
-        cluesLabel.text = cluesString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answersLabel.text = solutionsString.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        letterButtons.shuffle()
-        
-        if letterButtons.count == letterBits.count {
-            for i in 0..<letterButtons.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
+        DispatchQueue.main.async {
+            self.cluesLabel.text = cluesString.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.answersLabel.text = solutionsString.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            self.letterButtons.shuffle()
+            
+            if self.letterButtons.count == letterBits.count {
+                for i in 0..<self.letterButtons.count {
+                    self.letterButtons[i].setTitle(letterBits[i], for: .normal)
+                }
             }
         }
     }
+    
     
     func levelUp(action: UIAlertAction) {
         level += 1
